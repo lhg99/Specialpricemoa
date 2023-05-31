@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="icon" href="https://lh3.googleusercontent.com/fife/APg5EOZ9Ha46VAKYx5ZO3tlgf8wpWd_Kke11GbHEWw9xsak4zTwUfL_iMHiJitCd4gu1SaRm09aDk0pgyfIxMe_SsBIbQ4lmlnKSbRa-YqSn5xjBeiIQO4ZRMSIM_NHPoz-Md8IBLsp0ZxKKMJO-LyHWds3WuiIyDA37bDNbG5NtBvDdiW8rhiRnTZBghhZKx7LFAo9U23GCsKqk_sCGQLJ8xJeCxmb99rAD_3et4u2X2RRdHQ8M4JwrOGduxC32kV6RTF-OJhaTRV8phzb4ZkjvwsjBFuRYcJ9NkANX2hzFO7J3GdjsG6MqZraESIwOs3Q3q2yYBr6fCAC8Uf75R4SUBLFtEVfS0qEm6qSZbdCVy6ADZjCnp1Bo-eETgvNae-WnE-UjW_06wajpYjvOLpyV6vrQL4sbDDqIFc7abseKKvIzK_w_HH-gU7yuJRoH4YsGLByMVGbI9N3szohxseCl2EZBcJx9fnNzCo15osxk41X-267JJCE6iw-_yUmC3GAn28IcBqxdvSJiaSMCqiuSvteVINA_Hxi-WO26fwcvnmZKhm6hOrOSprwmN9zgIHYKdNimBjyBXNzJlceslM8_AipwwNUJiUQh0rFq-Fyv6TEobDX9HaCJSCcJncJIjh1_Vj5H2EQ08UJa8NMXIJIHE4tQ_eMLvGSbLknOi7i797oHdvMv1lJ1rB9-fJH7Zb07hqRXPx8Ya0XtCJoNRPnqhohFmBpyGkOtJ8eyJXr2FDu8nyXT31d__5UOkPWrevbzk4AZVYyvY_piagGjEBHsHeZ1zEjNrkY4VL2vWRJPP69Lb2NPictOEwldA5XB8mQjfpKXVUwGvJeHfnYEb__3k5NHmEL2r1lyu6XykG6ciNALewNbO6ep6AsIVk1eR-ETWEPsC8xPqW6mbu5YWcQVBvZR4fPtJTB7n1xWNxFPb2bRF4cKO9T-B2E_wSs1nLQXDkt9GTy2Yiq4AFW5INk7kAKpVZt_uj-PXyR_-c3jsWzO6yoEaPNVCRvf3YdyYy-bBDCbvNfOVEG5AsRL3tEqJ1fn7XzOMtUSjrr6Yb3IY1ddSnh8ptvloOf1_spL-NnmKOPxk7Xc9rXFNviNvlrd8UJiDv5GMf6WUFBxtAQhVPJ_9YDDGYjyxAlaX3-jJuyMaw6Rj7QkbxkUlt3Ut_xEB4HtvIr3TBRWbyrVz5xSXHJK1T575wNpliLWSyAJ9qFkn6XGYismRiAYha4ii__YXCooOJE1qyAfq7WiwGalC2QAVfGAARXMIR-3DMaCiycgHj-gWH_rDb2s_cPiHiRsK9F3aEg4XFarGKcolF0S7JG6aFPJ_g3sFrhGLLaPZ3qwQwTVc0zOpfVGqMEfqgP8wVgT79zPi9cRB2WJjqjfGKlLm09hKmPMy_AXhX0RQxuibThmSUl0kuQZi9evmmrssXJtryeWYtg22bd4S5RVeIF3qzCahOA3DSyzYIr6LM19TBIqDZ8-KJOduu79CVGALXDDZQ=w2560-h1329"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
+
+        <title>특가모아</title>
+
+        <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='특가모아.css') }}">
+        <script>
+            $(document).ready(function(){ 
+                    listing();
+                });
+
+                function listing() {
+                    $('#interpark-box').empty()
+                    $.ajax({ 
+                        type: 'GET', 
+                        url: '/interpark_item', 
+                        data: {}, 
+                        success: function (response) { 
+                            let rows = response['interparks'] 
+                            for(let i = rows.length-1; i > rows.length-101; i--) {
+
+                                let title = rows[i]['Title'] 
+                                let title_link = rows[i]['Title_link'] 
+                                let thumbnail = rows[i]['Thumbnail'] 
+                                let sale_price = rows[i]['Sale_price'] 
+                                let sale = rows[i]['Sale']
+                                let base_price = rows[i]['Base_price']
+
+                                let temp_html = `<div class="col">
+                                                    <div class="card">
+                                                        <img src="${thumbnail}" class="card-img-top" alt="...">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">${title}</h5>
+                                                            <p class="card-text">${base_price}원↓</p>
+                                                            <p id="sale-price">${sale_price}원 ${sale}</p>
+                                                            <a href="${title_link}" class="btn btn-outline-dark" target="_blank">상품구매</a>
+                                                        </div>
+                                                    </div>
+                                                </div>`
+                                
+                                $('#interpark-box').append(temp_html) 
+                            }
+                        } 
+                    }) 
+                }
+        </script>
+    </head>
+    <body>
+        <header>
+            <div id="header_div">
+                <a href="/"><img id="logo"src="https://lh3.googleusercontent.com/fife/APg5EObsqUGKqdXh5krw2u_mZ5oGqjSdkC3ter5ry35suzWnsC4rsrTR0d1UbvJQR6uULj_nkeEiyMIv45lPApjfeWBslNJoA14xL2E_wq2WKB_Z39x8JnG-NiQrC5EHIS7XySEf_sCccAzawMveBjgqfDgZkSW9TZE6MCO7NEx3JCrBSrmEuPJzbNh-0LD0edH0aXD9TlJRN5zh6q85P2tkmu8e5IdPmVkbAKtGv6gc2KiSU2dLEtMlck-dzCDOZB5oqUMwPstDFOvp-htqfvuFwCMf_EroGRtK81mOHqwFgeW6qKUIzJKqAWid1XTE0WgRlQmWQxDVIhhXmhLXaNFQFclQmtniYhyG5-zmTeVXedaSTW24eOMJm0hV08XDp0fmFHAi3XIFrlqPIszb_7CqED5frpmLX4IWGVP29wKjiS_JFJDHb025QAppwoeyIpCc3T08azJ4q-Xbw2_HsTklNH3DaPdFClj5ZxbXg8Ir_Htus-plY7BT3j-E0wwPYkUQ2p7z6V5FVJ-iu-NOvjWykcNheWBD9R0uRh4vvOD9XM26QgDZRLJLv2qii8rVeSNRvM8TbgYRo1_GWhl1N4ORBUYizPQ-kuAihsSgJl_9htlwE09E7dN8cdbBFiV4oqKYbKMul8DaUgvfJs0ymSUYSfxq7qF0vqyTCAOXdt_dhpGDg6CJbgNSEr2wJyzSDirMMsmBroDBA7d-xZjK5BNqWbdKimsa02I1pRAKyQcXJR14CYEKLW3VamDly2r-6vV1g0MZQHPsCN63BgkW0sW4tZh75LNsxro0Mubii4catYEEXNkpJJVkUcqsFMOGvnbiteyeycn5TiIk4ZxpswX4s61qYe9CudBMTAjQJ9brA85tBYh3KxXQlWZkPdeZ2i_lgtOEs7Xyo9QheCu7XVG5CVTSyEXmxJB6_ehcUI3V_Wzf48yCr6Ewv15mJT9Dn0KT4FFGHKoP7lrOhECdUpRRnolMltzasflpTtSjYKwsa1Wt_suJN3CWGLvAEwq9A8dUal7p38NcwedhramYNd1ErIQSBQMAcx1SnitnDf0lpZe60nUCjbjMweTg_SlAMRSTqU5PoqBTQZK7EnyXu3H3vZBG18FZlz7s7EQsghv1OcJCivqs3YJX_zU6ifyWQxR7GdMSDntvkFcgJGSluXb7iDA3JF-iEygqnjUUn12MY8ZhkMjKUqCLySefSh9p-b2uBnMrWikdGtuaciu0qedhTYDnF23BUYpsbgJ9p63xxr8MUlS0GQM3EdUI0WWU6gHTuexRcCNOFzcsSKcVAs0MES7W1_ki5BBneNqwDcb0my70KUDICxyf7fyV4FW2IYw8SS6ZP5kl59t0wxSkun7iSNjXfw-AR7UYY0jsYoKbekHIUhLdgTRNMDMSPO40XAz0Xb6Pb_M2czXScLV29mbq6EBMHWokfYx-wP9_3cTWBYLALeyvyhaD7yWmGpyGgXhN-UoI8ktHBuMWJ4xkvilBsKa5tw=w2560-h1329" width="200px"></a>
+                <a href="/"><h1>Special price MOA</h1></a>
+            </div>
+            <nav id="navigation">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a href="/coopang"><button type="button" class="btn btn-danger">쿠팡</button></a>
+                    <a href="/street_11th"><button type="button" class="btn btn-danger">11번가</button></a>
+                    <a href="/auction"><button type="button" class="btn btn-danger">옥션</button></a>
+                    <a href="/gmarket"><button type="button" class="btn btn-danger">G마켓</button></a>
+                    <a href="/interpark"><button type="button" class="btn btn-danger">인터파크</button></a>
+                    <a href="/wemap"><button type="button" class="btn btn-danger">위메프</button></a>
+                    <a href="/tmon"><button type="button" class="btn btn-danger">티몬</button></a>
+                  </div>
+                  <a href="/search"><img id="search-icon"src="https://lh3.googleusercontent.com/fife/APg5EObXEGjACQ2am1eO9-SANktzX1H-85xKv08IGw4PLKKayovICZ6WpMkrTjyTh6Y0iKLbaGdmgxy7LYp93gP-XVlOcjTHgSVvI5F-6IlRy1v0bJ93mVlRBWVDA5NcWPTmA3MbMPvpsPpXTTPzHo41maZFYIBS_4SVqS0P4Af2nyCnculObXJC5dxW_kI_JHBJK0ErbBDpRjDlowtvWoa1umtFksWFQT6HAfVzfJom4cV4vhBjXiOc5BdOqRTxoBvZmq2b_ZhgalnjgHAr1W11V68da9kL0tjDXf9MxXSUS8iseTH9MbC6dRExUYxAD5oZz4dvqKszCSpVblSIGxjioJG8DyYAkvXK0kBFZytpZkh8KlL0adEHuuBuKGzmGOggxM4Dd52kEjIpPPX1eypXKZ62FUe3nf9YX5SqZzpzRi0giDh7OKo45s_s_9YkhHxIRaxou10eouG9g6a2_u2Nr9K7AshMp6stucw3I9FIxdSeEEEPnSFQRLGdCvuhoqsaijDdZkSrF69V9eAXW8Hu8zgTbr1AW3cJgXzoqBfpJZM9GzewinRW58TPKTY49rvDhQvvp9aaKuMd1UYG-KtKyleHxIEwFRB70yrcOYPfe72207sibE9jMne-ruHsrBT0YQsPp02J_okQ9jQud4tbAhxMGXL9O_By8brh32k2QUExk_8DOFXhM8Cgdi_NgsRckeDU1_5jN-OSXmJB4HRGJ4xzeoGZ6QCcDXK7GZW4_HWHipiNOSYKuRFTkKWmJh1-Z4MNX2-b9TaCCIYapTVzbmEX3eI81TZES4NadWaIznKSzoTPPjdwZPlF-SXniJT4SlcN8Y-bkrTr2Vd5k4y-jXkHGuv3n1_Hoo3O3yr3DDPL5lUhGGjykdHP3sCBghj5jWEY5ThWIqZjpDrN8ob2vZ-0dYoQt92VuqyjnbU0JGEnXNwA0R4WAH_F8ccXHcQUPimQ3dvmUqU48xg0EaOvvU8GaeMo7XZ8oIaJvkndUhB-1rA0CSi80Wxj2YANuLLw93008fJugzik7V_NzJT__AEV2xa5Zn2W5PWgp3zx-EYYLgZbIyP8hsAmXqXpk4hxMossd-9JGDNeEVK0QfiZqu7Z8l20orHeG_nGvlz67w-Fl__nMC1gCT_u46Otx8O9Vsb76_RQvsJy9tzBYj4n7YXD2Iqxd5yFTkpsy5cLDcUgIeOx3g6iM8scdUJjuARc8vof8YqVVTBWSTitoeGsxzTnXSBWyEnLVu0FFP-qGboFlrw7g0P2LOuws2TgB8MBMtk42JcEi2Gjhm7g-myIWF78pdsVnhm_eKbuqcpEwtRWoPU0stKCZELKriYsEx8YFs96macMXfwC34ZAPtlCnnpey_caIiUvfc6gNXWWBw8-gzkyO4wsObPv20MqY4KEsZPsKeWBcaeA0Pwzh-ogFNrTn9m7xRwstJBKs_7n_uZL_u6bmfi9RmvcO3zoiL8a8zEh8b6MKTdaxVZIo4cgdUAMLw=w2560-h1329"></a>
+            </nav>
+        </header>
+        <hr id="nav_hr">
+        <div id="title_position">
+            <a href="https://www.interpark.com/" target="_blank"><img src="data:image/jpeg;base64,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" width="220px"></a><h3 id="site_size">특가</h3>
+        </div>
+        <hr><br>
+        <section id="interpark_section">
+            <div class="row row-cols-1 row-cols-md-4 g-4" id="interpark-box">
+            </div>
+        </section>
+        <hr>
+        <footer>
+            <p>&copy; 2023 캡스톤디자인-SW Project. Wee seongjun, Lee hyungi</p>
+        </footer>
+    </body>
+</html>
