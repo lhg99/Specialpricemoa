@@ -55,10 +55,7 @@
 ## 사용방법
 
 
-www.specialpricemoa.site
-
-
-위 url로 접속하시면 웹 사이트를 확인하실 수 있습니다. 
+[사이트 바로가기](www.specialpricemoa.site)
 
 
 (현재는 AWS 과금 이슈로 인해 배포가 중지되었습니다.)
