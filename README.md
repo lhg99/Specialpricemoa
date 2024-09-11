@@ -55,7 +55,7 @@
 ## 사용방법
 
 
-[사이트 바로가기](www.specialpricemoa.site)
+[사이트 바로가기](http://www.specialpricemoa.site)
 
 
 (현재는 AWS 과금 이슈로 인해 배포가 중지되었습니다.)
