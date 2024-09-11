@@ -4,9 +4,6 @@
 단국대학교 캡스톤 디자인 수업에서 진행한 프로젝트 입니다.
 
 
-특가모아의 메인 페이지 입니다.
-
-
 ![main](https://github.com/user-attachments/assets/9e476ab8-b561-4a93-a532-253a8998025d)
 
 
